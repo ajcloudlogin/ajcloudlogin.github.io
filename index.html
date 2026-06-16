@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Abhijith Geda – Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--accent:#7c5cfc;--accent2:#00e5ff;--accent3:#ff6b6b;--accent4:#ffc850;--glass:rgba(255,255,255,0.04);--gb:rgba(255,255,255,0.09);--text:#e8e8f0;--muted:#8888aa;--bg:#0a0a12;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;}
+.bg-orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.15;animation:dr 18s ease-in-out infinite;}
+.o1{width:600px;height:600px;background:var(--accent);top:-200px;left:-100px;}
+.o2{width:500px;height:500px;background:var(--accent2);bottom:-150px;right:-100px;animation-delay:-6s;}
+.o3{width:350px;height:350px;background:var(--accent4);top:40%;left:50%;animation-delay:-12s;}
+@keyframes dr{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(40px,-60px) scale(1.05);}66%{transform:translate(-30px,40px) scale(.95);}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(20px);background:rgba(10,10,18,.75);border-bottom:1px solid var(--gb);}
+.nlogo{font-weight:700;font-size:1.05rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer;}
+.nlinks{display:flex;gap:1.5rem;list-style:none;}
+.nlinks a{color:var(--muted);text-decoration:none;font-size:.84rem;transition:color .2s;position:relative;}
+.nlinks a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s;}
+.nlinks a:hover{color:var(--text);}
+.nlinks a:hover::after,.nlinks a.act::after{width:100%;}
+.nlinks a.act{color:var(--text);}
+
+section{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6rem 2rem;}
+section.sm{min-height:auto;padding:4rem 2rem;}
+.mx{max-width:1100px;width:100%;margin:0 auto;}
+.sl{font-family:'Fira Code',monospace;font-size:.74rem;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.5rem;}
+.st{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:700;letter-spacing:-.02em;margin-bottom:.8rem;}
+.sd{width:60px;height:2px;background:linear-gradient(to right,var(--accent),var(--accent2));margin-bottom:2.25rem;border-radius:2px;}
+.gt{background:linear-gradient(135deg,#fff 0%,var(--accent) 40%,var(--accent2) 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.btn{padding:.72rem 1.6rem;border-radius:10px;font-size:.9rem;font-weight:500;cursor:pointer;transition:all .25s;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;border:none;}
+.bp{background:linear-gradient(135deg,var(--accent),#5a3bd4);color:#fff;}
+.bp:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(124,92,252,.4);}
+.bo{background:transparent;color:var(--text);border:1px solid var(--gb);}
+.bo:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+.tag{background:rgba(124,92,252,.1);border:1px solid rgba(124,92,252,.2);color:var(--accent);font-size:.72rem;padding:.22rem .58rem;border-radius:6px;font-family:'Fira Code',monospace;display:inline-block;}
+.t2{background:rgba(0,229,255,.08);border-color:rgba(0,229,255,.2);color:var(--accent2);}
+.t3{background:rgba(255,107,107,.08);border-color:rgba(255,107,107,.2);color:var(--accent3);}
+.t4{background:rgba(255,200,80,.08);border-color:rgba(255,200,80,.2);color:var(--accent4);}
+.fi{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s;}
+.fi.vis{opacity:1;transform:translateY(0);}
+[data-f]{transition:opacity .32s,transform .32s;}
+[data-f].fd{opacity:0;transform:translateY(8px);}
+
+/* HERO */
+.hbadge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(124,92,252,.12);border:1px solid rgba(124,92,252,.3);color:var(--accent);font-size:.76rem;padding:.38rem 1rem;border-radius:999px;margin-bottom:1.6rem;font-family:'Fira Code',monospace;}
+.hbadge .dot{width:7px;height:7px;background:#00e5ff;border-radius:50%;animation:bl 2s infinite;}
+@keyframes bl{0%,100%{opacity:1;}50%{opacity:.3;}}
+h1.ht{font-size:clamp(2.7rem,7vw,5.2rem);font-weight:900;line-height:1.05;letter-spacing:-.03em;margin-bottom:.8rem;}
+.hsub{font-size:clamp(.92rem,2.2vw,1.06rem);color:var(--muted);max-width:640px;margin:0 auto 1.6rem;line-height:1.78;}
+
+/* KPI DEMO */
+.dash{background:var(--glass);border:1px solid var(--gb);border-radius:18px;padding:1.4rem;margin-top:2.25rem;max-width:680px;margin-left:auto;margin-right:auto;}
+.dtitle{font-size:.72rem;font-family:'Fira Code',monospace;color:var(--muted);margin-bottom:.9rem;letter-spacing:.07em;}
+.krow{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1rem;}
+.kpi{background:rgba(0,0,0,.3);border-radius:9px;padding:.65rem;text-align:center;border:1px solid var(--gb);}
+.kv{font-size:1.15rem;font-weight:700;color:var(--accent2);}
+.kl{font-size:.62rem;color:var(--muted);margin-top:.15rem;}
+.bars{display:flex;align-items:flex-end;gap:.45rem;height:72px;}
+.bw{flex:1;display:flex;flex-direction:column;align-items:center;gap:.25rem;}
+.br{width:100%;border-radius:3px 3px 0 0;transition:height .8s ease;}
+.bl2{font-size:.58rem;color:var(--muted);}
+
+/* ABOUT */
+.agrid{display:grid;grid-template-columns:1fr 1.7fr;gap:3.5rem;align-items:center;}
+.avatar{width:100%;aspect-ratio:1;border-radius:24px;background:linear-gradient(135deg,rgba(124,92,252,.2),rgba(0,229,255,.1));border:1px solid var(--gb);display:flex;align-items:center;justify-content:center;font-size:4.5rem;position:relative;}
+.aring{position:absolute;inset:-8px;border-radius:30px;border:1px solid rgba(124,92,252,.2);animation:rp 4s ease-in-out infinite;}
+@keyframes rp{0%,100%{opacity:1;}50%{opacity:.3;}}
+.igrid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-top:1.25rem;}
+.icard{background:var(--glass);border:1px solid var(--gb);border-radius:11px;padding:.85rem;text-align:center;}
+.inum{font-size:1.5rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+.ilbl{font-size:.7rem;color:var(--muted);margin-top:.2rem;}
+
+/* SKILLS */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:1.1rem;}
+.scat{background:var(--glass);border:1px solid var(--gb);border-radius:14px;padding:1.25rem;transition:border-color .3s;}
+.scat:hover{border-color:rgba(124,92,252,.3);}
+.scn{font-weight:600;font-size:.88rem;margin-bottom:.65rem;}
+.stags{display:flex;flex-wrap:wrap;gap:.35rem;}
+
+/* PROJECTS */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.4rem;}
+.pcard{background:var(--glass);border:1px solid var(--gb);border-radius:18px;padding:1.6rem;position:relative;overflow:hidden;transition:transform .3s,border-color .3s;}
+.pcard.ft{border-color:rgba(124,92,252,.3);background:linear-gradient(135deg,rgba(124,92,252,.07),rgba(0,229,255,.03));}
+.pcard::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,92,252,.06),transparent);opacity:0;transition:opacity .3s;}
+.pcard:hover{transform:translateY(-4px);border-color:rgba(124,92,252,.4);}
+.pcard:hover::before{opacity:1;}
+.pbdg{display:inline-block;font-size:.65rem;font-family:'Fira Code',monospace;padding:.18rem .5rem;border-radius:5px;margin-bottom:.5rem;}
+.bft{background:rgba(124,92,252,.2);color:var(--accent);border:1px solid rgba(124,92,252,.3);}
+.bimp{background:rgba(0,229,255,.1);color:var(--accent2);border:1px solid rgba(0,229,255,.25);}
+.pn{font-size:1.05rem;font-weight:600;margin-bottom:.35rem;}
+.pd{font-size:.82rem;color:var(--muted);line-height:1.72;margin-bottom:.85rem;}
+.pimp{background:rgba(255,200,80,.06);border:1px solid rgba(255,200,80,.18);border-radius:7px;padding:.5rem .7rem;font-size:.75rem;color:var(--accent4);margin-bottom:.85rem;line-height:1.5;}
+.plnk{font-size:.78rem;color:var(--muted);text-decoration:none;transition:color .2s;}
+.plnk:hover{color:var(--accent);}
+
+/* TIMELINE */
+.tl{position:relative;padding-left:2rem;}
+.tl::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),var(--accent2),transparent);}
+.ti{position:relative;margin-bottom:2.4rem;padding-left:1.5rem;}
+.td{position:absolute;left:-2.4rem;top:.3rem;width:11px;height:11px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 12px rgba(124,92,252,.6);}
+.tdt{font-family:'Fira Code',monospace;font-size:.72rem;color:var(--accent);margin-bottom:.25rem;}
+.tr{font-size:1rem;font-weight:600;margin-bottom:.12rem;}
+.tc{font-size:.84rem;color:var(--accent2);margin-bottom:.5rem;}
+.tdsc li{font-size:.83rem;color:var(--muted);line-height:1.72;margin-bottom:.35rem;padding-left:.4rem;}
+.tdsc li strong{color:var(--text);}
+
+/* EDU */
+.ecards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.1rem;}
+.ecard{background:var(--glass);border:1px solid var(--gb);border-radius:14px;padding:1.3rem;transition:border-color .3s;}
+.ecard:hover{border-color:rgba(124,92,252,.3);}
+.edeg{font-weight:600;font-size:.94rem;margin-bottom:.25rem;}
+.esch{color:var(--accent2);font-size:.84rem;margin-bottom:.2rem;}
+.edt{font-family:'Fira Code',monospace;font-size:.72rem;color:var(--muted);margin-bottom:.45rem;}
+.egpa{display:inline-block;background:rgba(124,92,252,.1);border:1px solid rgba(124,92,252,.2);color:var(--accent);font-size:.7rem;padding:.17rem .5rem;border-radius:6px;font-family:'Fira Code',monospace;}
+
+/* PUBS */
+.publ{display:flex;flex-direction:column;gap:.8rem;}
+.pubc{background:var(--glass);border:1px solid var(--gb);border-radius:12px;padding:1rem 1.3rem;transition:border-color .3s;display:flex;gap:.9rem;align-items:flex-start;}
+.pubc:hover{border-color:rgba(124,92,252,.3);}
+.pubi{font-size:1.3rem;flex-shrink:0;}
+.pubt{font-size:.85rem;font-weight:500;margin-bottom:.22rem;line-height:1.5;}
+.pubv{font-size:.72rem;color:var(--accent2);font-family:'Fira Code',monospace;}
+
+/* PERSONAL */
+.pergrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:1.1rem;}
+.percard{background:var(--glass);border:1px solid var(--gb);border-radius:14px;padding:1.25rem;transition:all .3s;text-align:center;}
+.percard:hover{border-color:rgba(0,229,255,.3);transform:translateY(-3px);}
+.peri{font-size:2rem;margin-bottom:.5rem;}
+.pertn{font-weight:600;font-size:.88rem;margin-bottom:.28rem;}
+.perd{font-size:.76rem;color:var(--muted);line-height:1.6;}
+
+/* CONTACT */
+.ccard{background:var(--glass);border:1px solid var(--gb);border-radius:22px;padding:2.5rem;max-width:580px;margin:0 auto;position:relative;overflow:hidden;text-align:center;}
+.ccard::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top,rgba(124,92,252,.08),transparent 60%);}
+.ccard *{position:relative;z-index:1;}
+.cemail{font-size:1.05rem;font-weight:500;margin:1rem 0;color:var(--accent);}
+.slinks{display:flex;justify-content:center;gap:.85rem;margin-top:1rem;}
+.slink{width:42px;height:42px;border-radius:10px;background:var(--glass);border:1px solid var(--gb);display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--muted);transition:all .2s;}
+.slink:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+footer{position:relative;z-index:1;text-align:center;padding:1.75rem;border-top:1px solid var(--gb);color:var(--muted);font-size:.72rem;font-family:'Fira Code',monospace;}
+
+/* OVERLAY */
+#ov{position:fixed;inset:0;z-index:500;background:rgba(5,5,15,.97);display:flex;align-items:center;justify-content:center;flex-direction:column;padding:2rem;}
+.ovt{font-size:clamp(1.4rem,3.5vw,2.3rem);font-weight:700;text-align:center;margin-bottom:.4rem;}
+.ovs{color:var(--muted);font-size:.88rem;text-align:center;margin-bottom:2.2rem;font-family:'Fira Code',monospace;}
+.rcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.9rem;max-width:780px;width:100%;}
+.rc{background:var(--glass);border:1px solid var(--gb);border-radius:14px;padding:1.3rem 1rem;cursor:pointer;transition:all .25s;text-align:center;}
+.rc:hover{border-color:var(--accent);transform:translateY(-3px);background:rgba(124,92,252,.08);}
+.rci{font-size:1.8rem;margin-bottom:.5rem;}
+.rcn{font-weight:600;font-size:.85rem;margin-bottom:.25rem;}
+.rcd{font-size:.7rem;color:var(--muted);line-height:1.4;}
+.ova{margin-top:1.75rem;font-size:.75rem;color:var(--muted);font-family:'Fira Code',monospace;}
+.ova a{color:var(--accent);cursor:pointer;text-decoration:underline;}
+
+/* ADMIN */
+#at{position:fixed;bottom:1.5rem;right:1.5rem;z-index:301;width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#5a3bd4);border:none;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(124,92,252,.4);transition:transform .2s;}
+#at:hover{transform:scale(1.05);}
+#at.hid{display:none;}
+#ap{position:fixed;bottom:4.5rem;right:1.5rem;z-index:300;background:rgba(12,12,22,.97);border:1px solid var(--gb);border-radius:16px;padding:1rem;backdrop-filter:blur(20px);width:240px;display:none;max-height:82vh;overflow-y:auto;}
+#ap.open{display:block;}
+.albl{font-size:.65rem;color:var(--muted);margin:.55rem 0 .3rem;font-family:'Fira Code',monospace;letter-spacing:.06em;}
+.rbtn{display:block;width:100%;text-align:left;background:transparent;border:1px solid transparent;color:var(--muted);font-size:.79rem;padding:.3rem .55rem;border-radius:7px;cursor:pointer;transition:all .18s;font-family:'Inter',sans-serif;margin-bottom:.15rem;}
+.rbtn:hover{color:var(--text);background:var(--glass);}
+.rbtn.act{color:var(--accent);background:rgba(124,92,252,.12);border-color:rgba(124,92,252,.2);font-weight:500;}
+.lbox{background:rgba(0,0,0,.35);border:1px solid var(--gb);border-radius:7px;padding:.38rem .55rem;font-family:'Fira Code',monospace;font-size:.65rem;color:var(--accent2);word-break:break-all;margin-bottom:.28rem;cursor:pointer;transition:border-color .2s;}
+.lbox:hover{border-color:var(--accent2);}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:rgba(124,92,252,.92);color:#fff;font-size:.78rem;padding:.45rem 1.1rem;border-radius:999px;font-family:'Fira Code',monospace;opacity:0;pointer-events:none;transition:opacity .3s;z-index:999;}
+.toast.show{opacity:1;}
+</style>
+</head>
+<body>
+<div class="bg-orbs"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<div class="toast" id="toast">Link copied! ✓</div>
+
+<!-- OVERLAY (for ?mode=pick) -->
+<div id="ov" style="display:none;">
+  <p style="font-family:'Fira Code',monospace;font-size:.75rem;color:var(--accent);margin-bottom:.9rem;letter-spacing:.1em;">// abhijith.geda · portfolio</p>
+  <h1 class="ovt">What role are you<br><span class="gt">hiring for?</span></h1>
+  <p class="ovs">Select a focus — I'll show you the most relevant work.</p>
+  <div class="rcs" id="ovCards"></div>
+  <div class="ova">or <a id="ovAll">view full portfolio & explore all roles</a></div>
+</div>
+
+<!-- ADMIN -->
+<button id="at" class="hid" title="Admin">⚙</button>
+<div id="ap">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">
+    <span style="font-family:'Fira Code',monospace;font-size:.66rem;color:var(--accent);">// control panel</span>
+    <button id="ac" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:.9rem;">✕</button>
+  </div>
+  <div class="albl">switch role view</div>
+  <div id="arb"></div>
+  <div class="albl">share role-specific links</div>
+  <div id="shl"></div>
+  <div class="albl">special links</div>
+  <div class="lbox" id="lnkPick">🌐 Unified (visitor picks role)</div>
+  <div class="lbox" id="lnkAdmin">🔑 Admin (full access)</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nlogo" id="nl">SVA/</div>
+  <ul class="nlinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#publications">Research</a></li>
+    <li><a href="#personal">Life</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="text-align:center;">
+  <div class="mx">
+    <div class="hbadge" data-f><div class="dot"></div><span id="hbTxt"></span></div>
+    <h1 class="ht"><span class="gt">Abhijith Geda</span></h1>
+    <p id="hTag" data-f style="font-family:'Fira Code',monospace;color:var(--accent2);font-size:1rem;margin-bottom:.9rem;letter-spacing:.04em;"></p>
+    <p class="hsub" id="hSub" data-f></p>
+    <div id="hPills" data-f style="display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;margin-bottom:1.6rem;"></div>
+    <div style="display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap;">
+      <a href="#projects" class="btn bp">View My Work →</a>
+      <a href="#contact" class="btn bo">Get In Touch</a>
+    </div>
+    <div class="dash fi" style="margin-top:2.25rem;">
+      <div class="dtitle">// live sample kpi dashboard</div>
+      <div class="krow">
+        <div class="kpi"><div class="kv" id="k1">—</div><div class="kl">Revenue YTD</div></div>
+        <div class="kpi"><div class="kv" id="k2">—</div><div class="kl">Churn Rate</div></div>
+        <div class="kpi"><div class="kv" id="k3">—</div><div class="kl">Avg CSAT</div></div>
+        <div class="kpi"><div class="kv" id="k4">—</div><div class="kl">Cost Saved</div></div>
+      </div>
+      <div class="bars" id="bars"></div>
+      <div style="font-size:.6rem;color:var(--muted);margin-top:.4rem;font-family:'Fira Code',monospace;">Q1–Q6 pipeline throughput · simulated data</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about"><div class="mx"><div class="agrid fi">
+  <div>
+    <div style="position:relative;"><div class="avatar">👨‍💻<div class="aring"></div></div></div>
+    <div class="igrid">
+      <div class="icard"><div class="inum">3.95</div><div class="ilbl">MS GPA · UIUC</div></div>
+      <div class="icard"><div class="inum">3+</div><div class="ilbl">Years Experience</div></div>
+      <div class="icard"><div class="inum">25%</div><div class="ilbl">Infra Costs Cut</div></div>
+      <div class="icard"><div class="inum">3</div><div class="ilbl">Publications</div></div>
+    </div>
+  </div>
+  <div>
+    <div class="sl">// about me</div>
+    <h2 class="st" id="aboutTitle" data-f></h2>
+    <div class="sd"></div>
+    <div id="aboutText" data-f style="color:var(--muted);line-height:1.78;font-size:.91rem;"></div>
+    <div style="display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.4rem;">
+      <a href="mailto:gedaabhijith@gmail.com" class="btn bp" style="font-size:.83rem;">Say Hello →</a>
+      <a href="#" class="btn bo" style="font-size:.83rem;">Download Resume ↓</a>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- SKILLS -->
+<section id="skills"><div class="mx">
+  <div class="fi" style="text-align:center;margin-bottom:2.2rem;">
+    <div class="sl">// skills & tools</div>
+    <h2 class="st" id="skillTitle" data-f></h2>
+    <div class="sd" style="margin:1rem auto 0;"></div>
+  </div>
+  <div class="sgrid fi" id="skillsG"></div>
+</div></section>
+
+<!-- PROJECTS -->
+<section id="projects"><div class="mx">
+  <div class="fi" style="text-align:center;margin-bottom:2.2rem;">
+    <div class="sl" id="projLabel" data-f></div>
+    <h2 class="st" id="projTitle" data-f></h2>
+    <div class="sd" style="margin:1rem auto 0;"></div>
+  </div>
+  <div class="pgrid fi" id="projG"></div>
+</div></section>
+
+<!-- EXPERIENCE -->
+<section id="experience"><div class="mx">
+  <div class="fi" style="margin-bottom:2.2rem;">
+    <div class="sl">// work history</div>
+    <h2 class="st">Where I've <span class="gt">Driven Impact</span></h2>
+    <div class="sd"></div>
+  </div>
+  <div class="tl fi">
+    <div class="ti"><div class="td"></div><div class="tdt">Jan 2025 – Present</div><div class="tr">Software Developer 2</div><div class="tc">COUNTRY Financial · Bloomington, IL</div><ul class="tdsc"><li>Developing key functionalities for <strong>portfolio management and reporting</strong> tools used organization-wide.</li><li>Managing Clarity PPM upgrades and conducting user training to enhance software adoption and reporting.</li><li>Acting as technical liaison aligning <strong>business requirements with system capabilities</strong>.</li></ul></div>
+    <div class="ti"><div class="td"></div><div class="tdt">May 2024 – Dec 2024</div><div class="tr">Software Developer & PM Intern</div><div class="tc">COUNTRY Financial · Champaign, IL</div><ul class="tdsc"><li>Engineered a production <strong>data ingestion pipeline</strong> using PySpark and Hadoop for the enterprise Data Lake.</li><li>Contributed to a POC evaluating <strong>CRM vendors' CDP capabilities</strong>, enhancing data integration and customer insights.</li><li>Spearheaded POC migrating GitLab runners to <strong>Azure Kubernetes Services</strong>, optimizing infra costs.</li></ul></div>
+    <div class="ti"><div class="td"></div><div class="tdt">Jan 2024 – May 2024</div><div class="tr">Graduate Research & Teaching Assistant</div><div class="tc">University of Illinois Urbana-Champaign</div><ul class="tdsc"><li>Co-developed course materials for BADM558 covering <strong>real-world data engineering and analytics</strong>.</li><li>Mentored students on AWS, Python, Spark, Hadoop, and NoSQL through labs and in-class sessions.</li></ul></div>
+    <div class="ti"><div class="td"></div><div class="tdt">Jul 2022 – Jun 2023</div><div class="tr">Senior Tech Development Associate</div><div class="tc">Bank of America · Hyderabad, India</div><ul class="tdsc"><li>Implemented a <strong>scoring model</strong> analyzing user behavior — reduced costs and aligned with long-term goals.</li><li>Engineered <strong>interactive risk management dashboards</strong> with data visualization for executive decision-making.</li><li>Conducted data mining on large datasets using SAS and Oracle — improved <strong>KPIs, outlier detection, and reporting</strong>.</li></ul></div>
+  </div>
+</div></section>
+
+<!-- EDUCATION -->
+<section id="education" class="sm"><div class="mx">
+  <div class="fi" style="margin-bottom:1.6rem;"><div class="sl">// education</div><h2 class="st">Academic <span class="gt">Background</span></h2><div class="sd"></div></div>
+  <div class="ecards fi">
+    <div class="ecard"><div class="edeg">Master of Computer Science</div><div class="esch">University of Illinois Urbana-Champaign</div><div class="edt">Aug 2023 – Dec 2024 · Champaign, IL</div><span class="egpa">GPA: 3.95 / 4.00</span></div>
+    <div class="ecard"><div class="edeg">B.Tech (Honors) — CS & Engineering</div><div class="esch">Manipal Institute of Technology, Manipal</div><div class="edt">Jul 2018 – Aug 2022 · Manipal, India</div><span class="egpa">CGPA: 9.39 / 10.00 · Top 4 of 240</span></div>
+  </div>
+</div></section>
+
+<!-- PUBLICATIONS -->
+<section id="publications" class="sm"><div class="mx">
+  <div class="fi" style="margin-bottom:1.6rem;"><div class="sl">// research</div><h2 class="st">Published <span class="gt">Research</span></h2><div class="sd"></div></div>
+  <div class="publ fi">
+    <div class="pubc"><div class="pubi">📊</div><div><div class="pubt">Data Mining for Emotional Analysis of Big Data</div><div class="pubv">Peer-Reviewed Research Article</div></div></div>
+    <div class="pubc"><div class="pubi">🧠</div><div><div class="pubt">Cognitive AI Computing Modeling in Meta Cognitive Architecture Carina</div><div class="pubv">ATIS International Conference 2022 · Deakin University</div></div></div>
+    <div class="pubc"><div class="pubi">🔐</div><div><div class="pubt">A Novel SDN-Based IoT Security Architecture Model for Big Data</div><div class="pubv">ATIS International Conference 2022 · Deakin University</div></div></div>
+  </div>
+</div></section>
+
+<!-- PERSONAL -->
+<section id="personal"><div class="mx">
+  <div class="fi" style="text-align:center;margin-bottom:2.2rem;">
+    <div class="sl">// beyond the code</div>
+    <h2 class="st">Life Outside <span class="gt">the Terminal</span></h2>
+    <div class="sd" style="margin:1rem auto 0;"></div>
+  </div>
+  <div class="pergrid fi">
+    <div class="percard"><div class="peri">🏸</div><div class="pertn">Badminton</div><div class="perd">State-level player from A.P., India. Former Team Captain at MIT Manipal.</div></div>
+    <div class="percard"><div class="peri">🏏</div><div class="pertn">Cricket</div><div class="perd">U-15 District Cricket Player from East Godavari, A.P.</div></div>
+    <div class="percard"><div class="peri">🎤</div><div class="pertn">Toastmasters</div><div class="perd">Member since 2020 — public speaking, communication & leadership.</div></div>
+    <div class="percard"><div class="peri">🤝</div><div class="pertn">Mentoring</div><div class="perd">Taught 20 children from low-income backgrounds — 15+ secured straight A's.</div></div>
+    <div class="percard"><div class="peri">💼</div><div class="pertn">HR Leadership</div><div class="perd">HR Head, MIT Sports Club (2020–2022).</div></div>
+    <div class="percard"><div class="peri">🖥</div><div class="pertn">Teaching Tech</div><div class="perd">Organized bootcamp training 60+ juniors in web dev.</div></div>
+  </div>
+</div></section>
+
+<!-- CONTACT -->
+<section id="contact"><div class="mx"><div class="fi">
+  <div class="sl" style="text-align:center;">// get in touch</div>
+  <h2 class="st" style="text-align:center;">Let's Build Something<br><span class="gt">Great Together</span></h2>
+  <div class="sd" style="margin:1rem auto 2rem;"></div>
+  <div class="ccard">
+    <p style="color:var(--muted);font-size:.89rem;line-height:1.78;">I'm actively seeking full-time roles — open to opportunities in Illinois and remote. Let's talk.</p>
+    <div class="cemail">gedaabhijith@gmail.com</div>
+    <div style="color:var(--muted);font-size:.78rem;margin-bottom:.9rem;">📍 Urbana, IL · +1 (217) 904-3351</div>
+    <a href="mailto:gedaabhijith@gmail.com" class="btn bp" style="margin:0 auto .5rem;">Say Hello →</a>
+    <div class="slinks">
+      <a href="https://linkedin.com/in/gedaabhijith" target="_blank" class="slink" title="LinkedIn"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+      <a href="mailto:gedaabhijith@gmail.com" class="slink" title="Email"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+    </div>
+  </div>
+</div></div></section>
+
+<footer><span style="color:var(--accent);">abhijith.geda</span> · built with care · 2025</footer>
+
+<script>
+const B=location.href.split('?')[0];
+
+/* ── ROLE DATA ── */
+const R={
+analyst:{
+  name:"Data / Business Analyst",icon:"📊",
+  badge:"Open to Data & Business Analyst roles",
+  tag:"Data Analyst · BI · Insights & Visualization",
+  aboutTitle:'Data storyteller<br><span class="gt">with engineering depth</span>',
+  about:"<p>I turn complex data into decisions. With a Master's from UIUC (3.95 GPA) and experience at COUNTRY Financial and Bank of America, I build dashboards, KPI frameworks, and data pipelines that drive real business outcomes.</p><p>I specialize in bridging raw data and business value — designing KPI dashboards, building ETL pipelines, and synthesizing insights that non-technical stakeholders can act on. I've worked with Tableau, Power BI, SAS, Oracle, PySpark, and SQL across enterprise environments.</p><p>I've also taught Big Data Infrastructure at UIUC and published three peer-reviewed papers in AI and data analysis — bringing both academic rigor and practical grounding to every analytical challenge.</p>",
+  skillTitle:'Analytics <span class="gt">Toolkit</span>',
+  skills:[
+    {n:"📊 BI & Visualization",t:[["Tableau","t4"],["Power BI","t4"],["Excel","t4"],["Data Studio","t4"]]},
+    {n:"🗄 Data & Query",t:[["SQL","t2"],["PostgreSQL","t2"],["Oracle","t2"],["MongoDB","t2"]]},
+    {n:"⚡ Programming",t:[["Python",""],["R",""],["SAS",""],["Bash",""]]},
+    {n:"🔄 Pipeline & Big Data",t:[["PySpark","t3"],["Hadoop","t3"],["Airflow","t3"],["Shell","t3"]]},
+    {n:"🤖 ML & Stats",t:[["NLP","t2"],["Sentiment Analysis","t2"],["TensorFlow","t2"],["scikit-learn","t2"]]},
+    {n:"🛠 Platforms",t:[["Clarity PPM",""],["AWS","t4"],["Azure","t4"],["MuleSoft",""]]}
+  ],
+  projLabel:"// analytics portfolio",projTitle:'Data Work That <span class="gt">Made an Impact</span>',
+  projects:[
+    {ft:1,bdg:"★ Featured · NLP & Analysis",n:"Cyberbullying Detection — NLP & Sentiment Analysis",d:"End-to-end ML pipeline detecting cyberbullying on social media. Rigorous literature review, NLP implementation, and evaluation on two real-world datasets.",imp:"📈 70% accuracy on Twitter · 72% on Wikipedia",t:[["Python",""],["NLP","t2"],["Sentiment Analysis","t2"],["scikit-learn","t3"]]},
+    {ft:0,bdg:"Enterprise · Data Pipeline",n:"Data Lake Ingestion Pipeline — COUNTRY Financial",d:"Engineered and deployed a production ingestion pipeline for the enterprise Data Lake, enhancing data operations and performance tracking.",imp:"⚡ Improved data freshness & pipeline observability across enterprise Data Lake",t:[["PySpark","t3"],["Hadoop","t3"],["Shell Scripts",""],["Azure","t4"]]},
+    {ft:0,bdg:"Enterprise · Risk Analytics",n:"Risk Management Dashboards — Bank of America",d:"Engineered interactive dashboards for risk management. Implemented a scoring model analyzing user behavior, reducing operational costs.",imp:"📉 Reduced costs through scoring model · improved outlier detection",t:[["SAS","t2"],["Oracle","t2"],["Tableau","t4"],["SQL",""]]},
+    {ft:0,bdg:"Research · Big Data",n:"Emotional Analysis of Big Data — Research",d:"Published research on data mining techniques for emotional analysis of large-scale datasets. Explored patterns, trends, and sentiment signals.",imp:"📄 Peer-reviewed publication · applied data mining at scale",t:[["Data Mining",""],["NLP","t2"],["Big Data","t2"],["Python","t3"]]},
+    {ft:0,bdg:"Product · Safety Analytics",n:"Illini Alert — Real-Time Safety Analytics",d:"Safety app with real-time alert analytics, user behavior tracking, and data-driven UI. Directed user testing to drive continuous improvements.",imp:"📍 Real-time analytics · data-driven iteration · user testing",t:[["Firebase","t2"],["Google Maps",""],["Android","t3"],["Analytics","t4"]]}
+  ],
+  pills:[["Tableau","t4"],["Power BI","t4"],["SQL","t2"],["Python",""],["SAS",""],["PySpark","t3"],["R","t2"],["Oracle",""]]
+},
+data:{
+  name:"Data Engineer",icon:"🔄",
+  badge:"Open to Data Engineering roles",
+  tag:"Data Engineer · PySpark · Hadoop · ETL · Cloud",
+  aboutTitle:'Building pipelines<br><span class="gt">that power decisions</span>',
+  about:"<p>I build the data infrastructure that powers decision-making at scale. At COUNTRY Financial I engineered production ingestion pipelines using PySpark and Hadoop. At Bank of America I ran data mining on large datasets and built analytics dashboards for risk management.</p><p>I combine strong engineering fundamentals — Shell scripting, distributed computing, cloud platforms — with a deep understanding of how data flows from source to insight. I've migrated CI/CD to Azure Kubernetes, evaluated CDP vendors, and taught big data infrastructure at UIUC.</p>",
+  skillTitle:'Data Engineering <span class="gt">Stack</span>',
+  skills:[
+    {n:"🔄 Pipeline & ETL",t:[["PySpark","t3"],["Hadoop","t3"],["Airflow","t3"],["Shell Scripts",""]]},
+    {n:"🗄 Storage & Query",t:[["PostgreSQL",""],["MongoDB",""],["Oracle","t2"],["Neo4J",""],["Firebase","t2"]]},
+    {n:"☁️ Cloud & DevOps",t:[["Azure AKS","t4"],["AWS","t4"],["Docker","t4"],["GitLab CI","t2"]]},
+    {n:"⚡ Languages",t:[["Python",""],["SQL","t2"],["Bash",""],["Java",""]]},
+    {n:"📈 Analytics & BI",t:[["Tableau","t4"],["Power BI","t4"],["SAS",""],["R",""]]},
+    {n:"🔗 Integration",t:[["MuleSoft","t2"],["TIBCO","t2"],["REST APIs","t3"],["Clarity PPM",""]]}
+  ],
+  projLabel:"// data engineering work",projTitle:'Pipelines That <span class="gt">Scale</span>',
+  projects:[
+    {ft:1,bdg:"★ Featured · Enterprise",n:"Data Lake Ingestion Pipeline — COUNTRY Financial",d:"Engineered and deployed a production-grade ingestion pipeline using PySpark and Hadoop, enhancing data operations and performance tracking within the enterprise Data Lake.",imp:"⚡ Production pipeline serving enterprise analytics · PySpark + Hadoop on Data Lake",t:[["PySpark","t3"],["Hadoop","t3"],["Shell Scripts",""],["Azure","t4"]]},
+    {ft:0,bdg:"Enterprise · Data Mining",n:"Risk Data Mining & Reporting — Bank of America",d:"Conducted data mining on large datasets using SAS and Oracle. Created reports highlighting KPIs, outlier detection, and improved information retrieval.",imp:"📉 Large-scale data mining · improved outlier detection & reporting",t:[["SAS",""],["Oracle","t2"],["SQL","t2"],["Python",""]]},
+    {ft:0,bdg:"NLP · ML Pipeline",n:"Cyberbullying Detection — NLP/ML Pipeline",d:"Built an end-to-end ML data pipeline: collection, cleaning, feature engineering, NLP processing, model training, and evaluation on two real-world datasets.",imp:"📊 Full ML pipeline · 70% Twitter / 72% Wikipedia accuracy",t:[["Python",""],["NLP","t2"],["Pandas","t3"],["scikit-learn","t3"]]},
+    {ft:0,bdg:"Research · Big Data",n:"Emotional Analysis of Big Data — Research",d:"Published research applying data mining techniques to emotional analysis of large-scale datasets — exploring patterns and sentiment signals at scale.",imp:"📄 Peer-reviewed · big data mining at scale",t:[["Data Mining",""],["Big Data","t2"],["Python","t3"],["NLP","t2"]]},
+    {ft:0,bdg:"Product · Real-Time Data",n:"Illini Alert — Real-Time Data Platform",d:"Built a real-time data platform powering the Illini Alert safety app — Firebase backend, Maps API integration, analytics events and alert processing.",imp:"📍 Real-time data pipeline · Firebase + Maps API",t:[["Firebase","t2"],["Google Maps",""],["Android","t3"],["Java",""]]}
+  ],
+  pills:[["PySpark","t3"],["Hadoop","t3"],["SQL","t2"],["Python",""],["Azure","t4"],["AWS","t4"],["Airflow","t3"],["Shell",""]]}
+,
+ai:{
+  name:"AI / ML Engineer",icon:"🤖",
+  badge:"Open to AI / ML Engineering roles",
+  tag:"AI Engineer · NLP · ML Systems · TensorFlow",
+  aboutTitle:'Building intelligent<br><span class="gt">systems that learn</span>',
+  about:"<p>I build intelligent systems grounded in real data. I've published research in cognitive AI, IoT security, and emotional analysis of big data. I've implemented NLP and sentiment analysis pipelines achieving 70–72% accuracy, and taught big data + ML infrastructure at UIUC.</p><p>My strength is the full pipeline: data collection and cleaning, feature engineering, model training, evaluation, and deployment. I combine strong software engineering with ML fundamentals — not just calling APIs, but understanding why models work and how to make them production-ready.</p>",
+  skillTitle:'AI / ML <span class="gt">Stack</span>',
+  skills:[
+    {n:"🧠 ML & AI",t:[["TensorFlow","t3"],["CNN","t3"],["NLP","t2"],["Sentiment Analysis","t2"]]},
+    {n:"📐 Data & Research",t:[["Python",""],["PySpark","t3"],["Pandas",""],["NumPy",""],["R",""]]},
+    {n:"👁 Computer Vision",t:[["OpenCV","t2"],["CNN","t3"],["TensorFlow","t3"]]},
+    {n:"☁️ Infrastructure",t:[["AWS","t4"],["Hadoop","t3"],["Docker","t4"],["NoSQL","t2"]]},
+    {n:"🗄 Data Storage",t:[["PostgreSQL",""],["MongoDB",""],["Firebase","t2"],["Neo4J",""]]},
+    {n:"🛠 Engineering",t:[["Java",""],["Python",""],["Bash",""],["Git","t4"]]}
+  ],
+  projLabel:"// ai & ml work",projTitle:'Intelligent Systems <span class="gt">I\'ve Built</span>',
+  projects:[
+    {ft:1,bdg:"★ Featured · NLP / ML",n:"Cyberbullying Detection — NLP & Machine Learning",d:"Complete ML system: literature review → technique selection → NLP + sentiment analysis implementation → model training and evaluation on two real-world datasets (Twitter, Wikipedia).",imp:"🎯 70% accuracy on Twitter · 72% on Wikipedia · multiple ML techniques compared",t:[["Python",""],["NLP","t2"],["Sentiment Analysis","t2"],["TensorFlow","t3"],["scikit-learn","t3"]]},
+    {ft:0,bdg:"Research · Cognitive AI",n:"Meta Cognitive Architecture Carina — ATIS 2022",d:"Published research on cognitive artificial intelligence computing modeling in meta cognitive architecture. Presented at ATIS International Conference at Deakin University.",imp:"📄 Published at ATIS 2022 · Deakin University · cognitive AI modeling",t:[["AI","t2"],["Cognitive Computing","t2"],["Research",""],["Python",""]]},
+    {ft:0,bdg:"Research · IoT + AI",n:"SDN-Based IoT Security for Big Data — ATIS 2022",d:"Novel architecture model combining software-defined networking with IoT security for big data environments. Published at ATIS International Conference.",imp:"🔐 Published at ATIS 2022 · novel SDN-IoT-BigData architecture",t:[["IoT","t2"],["SDN",""],["Big Data","t3"],["Security","t4"]]},
+    {ft:0,bdg:"Research · Data Mining",n:"Emotional Analysis of Big Data",d:"Peer-reviewed research applying data mining techniques to emotional analysis at scale — sentiment extraction, pattern recognition, and trend detection.",imp:"📊 Peer-reviewed · emotional pattern detection at big data scale",t:[["Data Mining",""],["NLP","t2"],["Big Data","t2"],["Python","t3"]]},
+    {ft:0,bdg:"Enterprise · Scoring Model",n:"Behavioral Scoring Model — Bank of America",d:"Implemented a scoring model analyzing user behavior and response strategies using data analysis and ML techniques. Deployed with full-stack capabilities.",imp:"📉 Reduced costs · production-deployed ML scoring model",t:[["Python",""],["SAS",""],["Oracle","t2"],["ML","t3"]]}
+  ],
+  pills:[["TensorFlow","t3"],["NLP","t2"],["Python",""],["CNN","t3"],["OpenCV","t2"],["PySpark","t3"],["scikit-learn","t3"],["Hadoop","t3"]]
+},
+software:{
+  name:"Software Developer",icon:"💻",
+  badge:"Open to Software Development roles",
+  tag:"Software Developer · Full-Stack · Java · Python · React",
+  aboutTitle:'Building software<br><span class="gt">that lasts</span>',
+  about:"<p>I build robust, maintainable software end-to-end. With experience at COUNTRY Financial and Bank of America, I've shipped full-stack applications, managed enterprise systems like Clarity PPM, and led projects from requirements through deployment.</p><p>I thrive in collaborative environments where engineering quality matters — writing testable code, reviewing PRs, mentoring junior devs, and translating business requirements into systems that work. My stack spans Java, Python, React, Node.js, Spring, Django, and cloud platforms.</p>",
+  skillTitle:'Engineering <span class="gt">Toolkit</span>',
+  skills:[
+    {n:"⚡ Languages",t:[["Java",""],["Python",""],["JavaScript",""],["C#",""],["C/C++",""],["SQL","t2"]]},
+    {n:"🖼 Frontend",t:[["React","t2"],["Bootstrap","t2"],["Android","t2"],["JavaScript","t2"]]},
+    {n:"⚙️ Backend",t:[["Spring","t3"],["Node.js","t3"],["Django","t3"],["Flask","t3"]]},
+    {n:"🗄 Databases",t:[["PostgreSQL",""],["Firebase","t2"],["MongoDB",""],["Neo4J",""],["Oracle","t2"]]},
+    {n:"☁️ Cloud & DevOps",t:[["AWS","t4"],["Azure AKS","t4"],["Docker","t4"],["GitLab CI","t2"]]},
+    {n:"🛠 Tools",t:[["Clarity PPM",""],["MuleSoft","t2"],["TIBCO","t2"],["Git","t4"],["Tableau","t4"]]}
+  ],
+  projLabel:"// software projects",projTitle:'Things I\'ve <span class="gt">Built</span>',
+  projects:[
+    {ft:1,bdg:"★ Featured · Mobile App",n:"Illini Alert App — Community Safety",d:"Developed the Illini Alert app enhancing Urbana-Champaign safety with a user-centric interface for real-time alerts and analytics. Directed user testing on prototypes to capture feedback and drive continuous enhancements.",imp:"📱 Real-time alerts · Google Maps + Firebase · user-tested prototypes",t:[["Android Studio","t2"],["Google Maps API",""],["Firebase","t4"],["Java",""]]},
+    {ft:0,bdg:"Enterprise · Platform",n:"Clarity PPM — Portfolio Management System",d:"Developing key functionalities for portfolio management and reporting at COUNTRY Financial. Managing system upgrades, user training, and acting as technical liaison for business requirements.",imp:"🏢 Enterprise platform · serving organization-wide portfolio management",t:[["Clarity PPM",""],["Gel Script","t2"],["Java",""],["SQL","t2"]]},
+    {ft:0,bdg:"Enterprise · Full-Stack",n:"Risk Management Dashboards — Bank of America",d:"Engineered interactive dashboards for risk management with full-stack capabilities. Implemented scoring models and improved frontend/backend optimizations.",imp:"📊 Full-stack delivery · risk dashboards · scoring models",t:[["Java",""],["SAS",""],["Oracle","t2"],["Frontend","t2"]]},
+    {ft:0,bdg:"DevOps · Infrastructure",n:"GitLab to Azure AKS Migration — COUNTRY Financial",d:"Spearheaded a POC migrating GitLab CI runners to Azure Kubernetes Services, optimizing infrastructure costs and improving scalability.",imp:"☁️ AKS migration · improved scalability · reduced infra costs",t:[["Azure AKS","t4"],["Kubernetes","t4"],["GitLab CI","t2"],["Docker","t4"]]},
+    {ft:0,bdg:"NLP · Python",n:"Cyberbullying Detection System",d:"ML system using NLP and sentiment analysis to detect cyberbullying on social media. Full implementation from data processing to model evaluation.",imp:"🎯 70% Twitter / 72% Wikipedia accuracy",t:[["Python",""],["NLP","t2"],["scikit-learn","t3"],["ML","t3"]]}
+  ],
+  pills:[["Java",""],["Python",""],["React","t2"],["Spring","t3"],["Node.js","t3"],["AWS","t4"],["SQL","t2"],["Docker","t4"]]
+},
+devops:{
+  name:"DevOps / Cloud Engineer",icon:"🛠",
+  badge:"Open to DevOps / Cloud roles",
+  tag:"DevOps Engineer · Kubernetes · Azure · CI/CD · IaC",
+  aboutTitle:'Building platforms<br><span class="gt">that accelerate teams</span>',
+  about:"<p>I've led POCs migrating GitLab runners to Azure Kubernetes Services, optimizing infrastructure costs and scalability. I've built data pipelines with shell scripts on Hadoop clusters and have hands-on experience with CI/CD, containerization, and cloud platforms at enterprise scale.</p><p>I believe great infrastructure is invisible — it just works. I focus on automation, observability, and giving engineering teams the tools to ship faster and safer.</p>",
+  skillTitle:'Platform & Cloud <span class="gt">Stack</span>',
+  skills:[
+    {n:"☁️ Orchestration",t:[["Kubernetes","t4"],["Docker","t4"],["Azure AKS","t4"],["AWS","t4"]]},
+    {n:"🔧 CI/CD & Automation",t:[["GitLab CI","t2"],["Shell Scripts",""],["Bash",""],["Python",""]]},
+    {n:"🔗 Integration & Middleware",t:[["MuleSoft","t2"],["TIBCO","t2"],["REST APIs","t3"],["Hadoop","t3"]]},
+    {n:"🗄 Data & Storage",t:[["PostgreSQL",""],["MongoDB",""],["Firebase","t2"],["Oracle","t2"]]},
+    {n:"📈 Monitoring & BI",t:[["Tableau","t4"],["Power BI","t4"],["Datadog","t3"]]},
+    {n:"⚡ Languages",t:[["Python",""],["Java",""],["SQL","t2"],["Bash",""],["Go",""]]}
+  ],
+  projLabel:"// infrastructure work",projTitle:'Platforms I\'ve <span class="gt">Built & Scaled</span>',
+  projects:[
+    {ft:1,bdg:"★ Featured · Cloud Migration",n:"GitLab to Azure AKS Migration — COUNTRY Financial",d:"Spearheaded a POC to migrate GitLab CI runners to Azure Kubernetes Services. Evaluated container orchestration strategies, optimized infrastructure costs, and improved scalability for CI/CD workloads.",imp:"☁️ Azure AKS migration · optimized infra costs · improved CI/CD scalability",t:[["Azure AKS","t4"],["Kubernetes","t4"],["GitLab CI","t2"],["Docker","t4"]]},
+    {ft:0,bdg:"Enterprise · Data Pipeline",n:"Data Lake Ingestion Pipeline — COUNTRY Financial",d:"Engineered production pipeline using PySpark and Hadoop, deployed via shell scripts on the enterprise Data Lake cluster.",imp:"⚡ Production pipeline · PySpark + Hadoop · shell script automation",t:[["PySpark","t3"],["Hadoop","t3"],["Shell Scripts",""],["Azure","t4"]]},
+    {ft:0,bdg:"Enterprise · Platform",n:"Clarity PPM System Management",d:"Managing ongoing Clarity PPM upgrades, conducting user training, and acting as technical liaison ensuring business requirements align with system capabilities.",imp:"🏢 Enterprise platform management · upgrades · user training",t:[["Clarity PPM",""],["Gel Script","t2"],["Java",""],["SQL","t2"]]},
+    {ft:0,bdg:"Teaching · Infrastructure",n:"Big Data Infrastructure — UIUC Teaching",d:"Co-developed course materials for BADM558 and taught students AWS, Spark, Hadoop, and NoSQL — bridging infrastructure with real-world analytics use cases.",imp:"🎓 Taught 60+ students · AWS + Spark + Hadoop infrastructure",t:[["AWS","t4"],["Spark","t3"],["Hadoop","t3"],["NoSQL","t2"]]},
+    {ft:0,bdg:"Product · Backend",n:"Illini Alert — Backend & Data Platform",d:"Built the Firebase backend and Maps API integration powering real-time alert processing and safety analytics for the Urbana-Champaign community.",imp:"📍 Real-time backend · Firebase + Maps API",t:[["Firebase","t2"],["Google Maps",""],["Android","t3"],["Java",""]]}
+  ],
+  pills:[["Kubernetes","t4"],["Azure AKS","t4"],["Docker","t4"],["AWS","t4"],["GitLab CI","t2"],["Shell",""],["PySpark","t3"],["Python",""]]}
+};
+
+/* ── HELPERS ── */
+function gp(k){return new URLSearchParams(location.search).get(k);}
+function bl(p){const u=new URL(B);Object.entries(p).forEach(([k,v])=>u.searchParams.set(k,v));return u.toString();}
+function cp(s){navigator.clipboard.writeText(s).catch(()=>{});const t=document.getElementById('toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
+function tr(el,fn){if(!el)return;el.classList.add('fd');setTimeout(()=>{fn();el.classList.remove('fd');},300);}
+
+/* ── APPLY ROLE ── */
+let cur='';
+function apply(k,anim){
+  const r=R[k];if(!r)return;cur=k;
+  const s=(id,fn)=>{const e=document.getElementById(id);if(!e)return;anim?tr(e,()=>fn(e)):fn(e);};
+  s('hbTxt',e=>e.textContent=r.badge);
+  s('hTag',e=>e.textContent=r.tag);
+  s('hSub',e=>e.textContent=r.about.replace(/<\/?p>/g,' ').trim());
+  s('hPills',e=>{e.innerHTML=r.pills.map(([n,c])=>'<span class="tag '+c+'">'+n+'</span>').join('');});
+  s('aboutTitle',e=>e.innerHTML=r.aboutTitle);
+  s('aboutText',e=>e.innerHTML=r.about);
+  s('skillTitle',e=>e.innerHTML=r.skillTitle);
+  s('skillsG',e=>{e.innerHTML=r.skills.map(c=>'<div class="scat"><div class="scn">'+c.n+'</div><div class="stags">'+c.t.map(([n,c2])=>'<span class="tag '+c2+'">'+n+'</span>').join('')+'</div></div>').join('');});
+  s('projLabel',e=>e.textContent=r.projLabel);
+  s('projTitle',e=>e.innerHTML=r.projTitle);
+  s('projG',e=>{e.innerHTML=r.projects.map(p=>{
+    return '<div class="pcard'+(p.ft?' ft':'')+'"><span class="pbdg '+(p.ft?'bft':'bimp')+'">'+p.bdg+'</span><div class="pn">'+p.n+'</div><div class="pd">'+p.d+'</div><div class="pimp">'+p.imp+'</div><div style="display:flex;flex-wrap:wrap;gap:.32rem;margin-bottom:.8rem;">'+p.t.map(([n,c2])=>'<span class="tag '+c2+'">'+n+'</span>').join('')+'</div><div style="display:flex;gap:.7rem;"><a href="#" class="plnk">↗ GitHub</a><a href="#" class="plnk">↗ Details</a></div></div>';
+  }).join('');});
+  document.querySelectorAll('.rbtn').forEach(b=>b.classList.toggle('act',b.dataset.r===k));
+  document.title='Abhijith Geda – '+r.name;
+}
+
+/* ── KPI ANIM ── */
+[{id:'k1',v:'$4.2M',d:300},{id:'k2',v:'3.8%',d:500},{id:'k3',v:'4.6/5',d:700},{id:'k4',v:'$890K',d:900}].forEach(x=>setTimeout(()=>{const e=document.getElementById(x.id);if(e)e.textContent=x.v;},x.d+500));
+const brs=[{h:42,l:'Q1'},{h:60,l:'Q2'},{h:55,l:'Q3'},{h:76,l:'Q4'},{h:88,l:'Q5'},{h:82,l:'Q6'}];
+const cols=['var(--accent)','var(--accent2)','var(--accent)','var(--accent2)','var(--accent4)','var(--accent4)'];
+const bc=document.getElementById('bars');
+brs.forEach((b,i)=>{const w=document.createElement('div');w.className='bw';const br2=document.createElement('div');br2.className='br';br2.style.cssText='height:0;background:'+cols[i]+';opacity:.72;';const lb=document.createElement('div');lb.className='bl2';lb.textContent=b.l;w.appendChild(br2);w.appendChild(lb);bc.appendChild(w);setTimeout(()=>{br2.style.height=b.h+'px';},900+i*110);});
+
+/* ── BUILD OVERLAY ── */
+const ovc=document.getElementById('ovCards');
+ovc.innerHTML=Object.entries(R).map(([k,r])=>'<div class="rc" data-r="'+k+'"><div class="rci">'+r.icon+'</div><div class="rcn">'+r.name+'</div><div class="rcd">'+r.tag.split('·').slice(1,3).join('·').trim()+'</div></div>').join('');
+ovc.querySelectorAll('.rc').forEach(c=>c.addEventListener('click',()=>{document.getElementById('ov').style.display='none';document.getElementById('at').classList.remove('hid');apply(c.dataset.r);}));
+document.getElementById('ovAll').addEventListener('click',()=>{document.getElementById('ov').style.display='none';showA();apply('analyst');});
+
+/* ── BUILD ADMIN ── */
+function showA(){document.getElementById('at').classList.remove('hid');document.getElementById('ap').classList.add('open');}
+const arb=document.getElementById('arb');
+arb.innerHTML=Object.entries(R).map(([k,r])=>'<button class="rbtn" data-r="'+k+'">'+r.icon+' '+r.name+'</button>').join('');
+arb.querySelectorAll('.rbtn').forEach(b=>b.addEventListener('click',()=>apply(b.dataset.r,true)));
+const shl=document.getElementById('shl');
+shl.innerHTML=Object.entries(R).map(([k,r])=>'<div class="lbox" data-u="'+bl({role:k})+'">'+r.icon+' '+r.name+'</div>').join('');
+shl.querySelectorAll('.lbox').forEach(b=>b.addEventListener('click',()=>cp(b.dataset.u)));
+document.getElementById('lnkPick').addEventListener('click',()=>cp(bl({mode:'pick'})));
+document.getElementById('lnkAdmin').addEventListener('click',()=>cp(bl({admin:'1'})));
+document.getElementById('at').addEventListener('click',()=>document.getElementById('ap').classList.toggle('open'));
+document.getElementById('ac').addEventListener('click',()=>document.getElementById('ap').classList.remove('open'));
+document.getElementById('nl').addEventListener('click',()=>document.getElementById('ap').classList.toggle('open'));
+
+/* ── INIT ── */
+const rp=gp('role'),mp=gp('mode'),adm=gp('admin');
+if(rp&&R[rp]){apply(rp);}
+else if(mp==='pick'){document.getElementById('ov').style.display='flex';apply('analyst');}
+else if(adm){showA();apply('analyst');}
+else{showA();apply('analyst');}
+
+/* ── SCROLL OBSERVERS ── */
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');}),{threshold:.08});
+document.querySelectorAll('.fi').forEach(e=>obs.observe(e));
+const secs=document.querySelectorAll('section[id]');
+const nAs=document.querySelectorAll('.nlinks a');
+const nobs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)nAs.forEach(a=>a.classList.toggle('act',a.getAttribute('href')==='#'+x.target.id));});},{threshold:.3});
+secs.forEach(s=>nobs.observe(s));
+</script>
+</body>
+</html>
