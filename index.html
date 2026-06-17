@@ -509,11 +509,29 @@ async function askAI(){
   btn.disabled=true;btn.textContent='⏳ Thinking...';ao.classList.add('vis');ao.innerHTML='<span class="tc"></span>';
   const sys=`You are a senior data analyst in a portfolio website. You have ONLY this data:\n\n${DS[curDS].ctx}\n\nRules:\n- If the question relates to this dataset, give a concise, data-driven answer (under 100 words). Use numbers.\n- If NOT related, respond: "That's outside this dataset's scope! Try asking about [what this data covers]. Happy to help you explore!"\n- Plain text only. Use • for bullets if needed. Be warm and professional.`;
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,system:sys,messages:[{role:'user',content:q}]})});
-    const data=await res.json();const text=data.content.map(c=>c.text||'').join('');
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-6',
+        max_tokens:1000,
+        messages:[{role:'user',content:sys+'\n\nUser question: '+q}]
+      })
+    });
+    if(!res.ok){
+      const errData=await res.json().catch(()=>({}));
+      throw new Error(errData.error?.message||'API returned '+res.status);
+    }
+    const data=await res.json();
+    const text=data.content.filter(c=>c.type==='text').map(c=>c.text).join('');
+    if(!text)throw new Error('Empty response from API');
     ao.innerHTML='';let i=0;
     (function t(){if(i<text.length){ao.innerHTML=text.slice(0,i+1)+'<span class="tc"></span>';i++;setTimeout(t,10+Math.random()*8);}else{ao.innerHTML=text;btn.textContent='Ask AI →';btn.disabled=false;}})();
-  }catch(e){ao.innerHTML='<span style="color:var(--a3);">Could not reach AI service. This demo calls Claude\'s API to generate real-time insights.</span>';btn.textContent='Ask AI →';btn.disabled=false;}
+  }catch(e){
+    console.error('AI Error:',e);
+    ao.innerHTML='<span style="color:var(--a3);">Error: '+e.message+'</span>';
+    btn.textContent='Ask AI →';btn.disabled=false;
+  }
 }
 document.getElementById('aiB').addEventListener('click',askAI);
 document.getElementById('aiIn').addEventListener('keydown',e=>{if(e.key==='Enter')askAI();});
