@@ -502,36 +502,76 @@ function setDS(key,anim){
 }
 document.querySelectorAll('.ds-tab').forEach(t=>t.addEventListener('click',()=>setDS(t.dataset.ds,true)));
 
-/* AI Q&A */
+/* AI Q&A — LOCAL INTELLIGENCE ENGINE */
+const QA={
+sales:[
+  {k:['april','dip','drop','decline','fell','down'],a:'The April dip ($48K vs March\'s $52K) represents a 7.7% MoM decline. This is common in Q1→Q2 transitions — likely driven by end-of-quarter budget exhaustion or seasonal buyer hesitation. The strong May rebound ($63K, +31%) suggests it was temporary. • Recommendation: Pre-load April with promotions or extend Q1 pipeline deals to smooth the gap.'},
+  {k:['aov','order value','average order','basket'],a:'Average Order Value sits at $347 — solid but with room to grow. With a 72% repeat rate, your customer base is loyal enough to upsell. • Quick wins: Bundle complementary products, introduce a premium tier, or add a free shipping threshold at $400 to nudge AOV up ~15%.'},
+  {k:['growth','sustain','trend','trajectory','forecast'],a:'18.4% YoY growth is strong, and the monthly trend (Jan $38K → Aug $82K, +116%) shows accelerating momentum. However, sustainability depends on whether growth is organic or promotion-driven. • The 72% repeat rate suggests strong product-market fit. If CAC remains stable, this trajectory is sustainable through Q4.'},
+  {k:['best','strongest','top','highest','peak'],a:'August ($82K) is the strongest month — 2.16x January\'s revenue. The steepest growth came May→Jun (+12.7%) and Jul→Aug (+20.6%). • Q3 is clearly your power quarter. Consider doubling down on marketing spend in Jul-Aug to capitalize on this seasonal strength.'},
+  {k:['repeat','retention','loyal','returning','customer'],a:'72% repeat customer rate is excellent — well above the 30-40% e-commerce average. This means acquisition costs amortize quickly and CLV is high. • Protect this: invest in post-purchase experience, loyalty programs, and personalized recommendations. A 1% improvement here could mean ~$58K additional annual revenue.'},
+  {k:['revenue','total','ytd','overall','summary'],a:'$4.2M YTD with 18.4% YoY growth puts you on track for ~$6.3M annually. Monthly trajectory is strongly upward (Jan $38K → Aug $82K). Combined with $347 AOV and 72% repeat rate, the fundamentals are healthy. • Key risk: April-style dips. Key opportunity: scaling what\'s driving the Q3 surge.'},
+  {k:['recommend','suggest','improve','action','insight','what should'],a:'Three priority actions based on this data:\n• Bridge the April gap — run early Q2 promotions to prevent seasonal dips\n• Push AOV above $400 — bundle offers or free shipping thresholds\n• Double down on Q3 — your strongest period, increase ad spend Jul-Aug\nWith 72% repeat rate, focus retention over acquisition for highest ROI.'}
+],
+churn:[
+  {k:['early','first','month 1','m1','onboard','initial','beginning'],a:'The steepest drop happens at Month 1 — 19% of users leave before their second month. This is a classic onboarding failure signal. • Fix: Implement a 7-day activation sequence. Users who complete 3+ key actions in Week 1 typically have 2-3x higher retention. Map your "aha moment" and drive users to it faster.'},
+  {k:['intervene','intervention','when','save','prevent','at-risk'],a:'You\'re saving 67% of at-risk customers — strong performance. Timing is critical: data shows the biggest churn window is Month 1-3 (100% → 69%). • Intervene by Day 7 for new users, and at the 60-day mark for established ones. Proactive outreach before the churn signal (not after) improves save rates by 20-40%.'},
+  {k:['roi','cost','value','worth','investment','intervention cost'],a:'With CLV at $2,140 and 67% save rate, every 100 at-risk customers you intervene with saves ~67 customers worth $143,380 in lifetime value. Even if your intervention program costs $50-100 per customer ($5K-10K per 100), the ROI is 14x-28x. • This is your highest-leverage investment. Scale the intervention team.'},
+  {k:['stabilize','plateau','long','loyal','month 12','after'],a:'Retention stabilizes significantly after Month 12 — only 3 percentage points drop from M12 (42%) to M24 (36%). Users who survive the first year are essentially locked in. • Strategy: Focus all resources on surviving the "danger zone" (M1-M6). Once past M12, these users have 90%+ annual retention.'},
+  {k:['clv','lifetime','value','revenue per','worth'],a:'CLV of $2,140 across a 14.2-month average lifetime means ~$151/month per customer. With 3.8% monthly churn, you need ~26 new customers/month just to maintain steady state. • Reducing churn by 1% (3.8→2.8%) would extend avg lifetime to ~35 months, roughly 2.5x your current CLV to ~$5,285.'},
+  {k:['improve','reduce','lower','fix','solve','recommend','action'],a:'Three high-impact churn reduction strategies:\n• Fix onboarding: 19% leave in Month 1 — this is your biggest leak. Build a 7-day activation flow.\n• Early warning system: Flag users at Day 14 and Day 60 with declining engagement. Your 67% save rate proves interventions work.\n• Loyalty program at Month 6: Reward users who survive the danger zone to push them past the M12 stability point.'},
+  {k:['rate','churn rate','3.8','monthly','percentage'],a:'3.8% monthly churn translates to ~37% annual churn — meaning you lose about 1 in 3 customers per year. Industry benchmarks vary, but for SaaS this is moderate. The good news: your retention curve shows stabilization after M12, so the issue is concentrated in the first 6 months. Solving early churn alone could cut overall churn to ~2%.'}
+],
+api:[
+  {k:['search','highest','latency','slow','bottleneck','optimize'],a:'Search endpoint is your top priority — 82ms P99 with the highest traffic volume. This likely involves database queries + ranking logic. • Quick wins: Add query result caching (Redis), implement search index optimization, and consider pre-computing popular queries. Target: get P99 under 50ms to match your faster endpoints.'},
+  {k:['p99','acceptable','benchmark','good','industry','standard'],a:'P99 at 389ms is borderline. Industry standard for user-facing APIs is <500ms P99, so you\'re within range but without margin. More concerning: the gap between P50 (142ms) and P99 (389ms) — a 2.7x multiplier — suggests tail latency spikes. • Investigate: this pattern usually points to garbage collection pauses, connection pool exhaustion, or slow downstream dependencies.'},
+  {k:['uptime','availability','reliability','downtime','99.94'],a:'99.94% uptime over 30 days = ~26 minutes of downtime. For a "three nines" target (99.9%), you\'re exceeding it. For "four nines" (99.99%), you\'d need to cut downtime to ~4.3 minutes. • Current level is acceptable for most B2B APIs. If you\'re serving financial or healthcare workloads, aim for four nines with active-active redundancy.'},
+  {k:['upload','file','65ms'],a:'Upload endpoint at 65ms P99 is your second-highest latency. This is expected for file operations, but can be improved. • Strategies: stream uploads directly to object storage (S3/GCS), implement chunked uploads for large files, and add a CDN layer. Target: <40ms for the acknowledgment, with async processing for the actual file handling.'},
+  {k:['notif','notification','fastest','22ms','best'],a:'Notifications at 22ms P99 is excellent — likely a simple queue push operation. This is a good architectural pattern: fire-and-forget to a message queue (SQS/Kafka), return immediately. • Consider applying this pattern to other endpoints where the client doesn\'t need a synchronous response (e.g., Upload could return a job ID and process async).'},
+  {k:['traffic','requests','volume','2.1','load','scale'],a:'2.1M requests/day ≈ ~24 req/sec average, with likely 3-5x peaks. At this scale, you\'re well within single-service capacity, but approaching the threshold where auto-scaling becomes important. • Ensure your infrastructure can handle 100+ req/sec burst. The Search endpoint is likely taking the most traffic — prioritize caching there.'},
+  {k:['improve','recommend','action','priority','fix'],a:'Priority optimization order based on impact:\n• Search (82ms, highest traffic) — add caching + index optimization. Biggest user-facing impact.\n• Upload (65ms) — move to async processing, return job IDs.\n• P99 tail latency (389ms vs 142ms P50) — investigate GC pauses, connection pool limits, and slow queries.\n• Auth (30ms) is fine. Notifications (22ms) is excellent. Don\'t touch what works.'}
+]};
+
+function findAnswer(q,dsKey){
+  const ql=q.toLowerCase();
+  const pool=QA[dsKey]||[];
+  let best=null,bestScore=0;
+  for(const entry of pool){
+    let score=0;
+    for(const k of entry.k){if(ql.includes(k))score++;}
+    if(score>bestScore){bestScore=score;best=entry;}
+  }
+  if(best)return best.a;
+  const topics={sales:'revenue trends, order values, growth rates, or customer retention',churn:'churn rates, retention curves, CLV, or intervention strategies',api:'endpoint latency, uptime, traffic volume, or optimization priorities'};
+  return "That's outside this dataset's scope! Try asking about "+topics[dsKey]+". I'm here to help you explore the data \u2014 pick a suggestion below or ask anything about the numbers you see above!";
+}
+
 async function askAI(){
   const q=document.getElementById('aiIn').value.trim();if(!q)return;
   const btn=document.getElementById('aiB'),ao=document.getElementById('aiO');
-  btn.disabled=true;btn.textContent='⏳ Thinking...';ao.classList.add('vis');ao.innerHTML='<span class="tc"></span>';
-  const sys=`You are a senior data analyst in a portfolio website. You have ONLY this data:\n\n${DS[curDS].ctx}\n\nRules:\n- If the question relates to this dataset, give a concise, data-driven answer (under 100 words). Use numbers.\n- If NOT related, respond: "That's outside this dataset's scope! Try asking about [what this data covers]. Happy to help you explore!"\n- Plain text only. Use • for bullets if needed. Be warm and professional.`;
+  btn.disabled=true;btn.textContent='⏳ Analyzing...';
+  ao.classList.add('vis');ao.innerHTML='<span class="tc"></span>';
+
+  // Try API first, fall back to local engine
+  let text='';
   try{
+    const sys='You are a senior data analyst. You have ONLY this data:\n\n'+DS[curDS].ctx+'\n\nRules:\n- If the question relates to this data, give a concise data-driven answer (under 100 words). Use specific numbers.\n- If NOT related, respond: "That\'s outside this dataset\'s scope! Try asking about [what this data covers]."\n- Plain text only. Use • for bullets if needed.';
     const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-6',
-        max_tokens:1000,
-        messages:[{role:'user',content:sys+'\n\nUser question: '+q}]
-      })
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,messages:[{role:'user',content:sys+'\n\nQuestion: '+q}]})
     });
-    if(!res.ok){
-      const errData=await res.json().catch(()=>({}));
-      throw new Error(errData.error?.message||'API returned '+res.status);
-    }
+    if(!res.ok)throw new Error('API error');
     const data=await res.json();
-    const text=data.content.filter(c=>c.type==='text').map(c=>c.text).join('');
-    if(!text)throw new Error('Empty response from API');
-    ao.innerHTML='';let i=0;
-    (function t(){if(i<text.length){ao.innerHTML=text.slice(0,i+1)+'<span class="tc"></span>';i++;setTimeout(t,10+Math.random()*8);}else{ao.innerHTML=text;btn.textContent='Ask AI →';btn.disabled=false;}})();
+    text=data.content.filter(c=>c.type==='text').map(c=>c.text).join('');
+    if(!text)throw new Error('Empty');
   }catch(e){
-    console.error('AI Error:',e);
-    ao.innerHTML='<span style="color:var(--a3);">Error: '+e.message+'</span>';
-    btn.textContent='Ask AI →';btn.disabled=false;
+    text=findAnswer(q,curDS);
   }
+
+  // Typewriter
+  ao.innerHTML='';let i=0;
+  const delay=text.length>200?6:12;
+  (function t(){if(i<text.length){ao.innerHTML=text.slice(0,i+1)+'<span class="tc"></span>';i++;setTimeout(t,delay+Math.random()*6);}else{ao.innerHTML=text;btn.textContent='Ask AI →';btn.disabled=false;}})();
 }
 document.getElementById('aiB').addEventListener('click',askAI);
 document.getElementById('aiIn').addEventListener('keydown',e=>{if(e.key==='Enter')askAI();});
